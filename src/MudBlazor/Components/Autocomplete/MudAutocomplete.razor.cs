@@ -667,6 +667,10 @@ namespace MudBlazor
             if (_elementReference?.IsClearing == true)
                 return;
 
+            // Autofill and other unfocused text updates must not open the menu (#12401).
+            if (!_isFocused)
+                return;
+
             if (DebounceInterval <= 0)
                 await OpenMenuAsync();
             else
